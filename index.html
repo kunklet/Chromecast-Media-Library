@@ -60,7 +60,8 @@
 						<button type="button" class="btn btn-default" ng-click="stopMedia()"><span class="glyphicon glyphicon-stop"></span></button>
 						<button type="button" class="btn btn-default" ng-click="seekMedia('forward', 30)"><span class="glyphicon glyphicon-forward"></span></button>
 						<button type="button" class="btn btn-default" ng-click="muteMedia()" ng-show="castData.showMute"><span class="glyphicon glyphicon-volume-off"></span></button>
-						<button type="button" class="btn btn-default" ng-click="unmuteMedia()" ng-show="castData.showUnmute"><span class="glyphicon glyphicon-volume-up"></span></button>
+						<button type="button" class="btn btn
+						-default" ng-click="unmuteMedia()" ng-show="castData.showUnmute"><span class="glyphicon glyphicon-volume-up"></span></button>
 						<button type="button" class="btn btn-default" ng-click="changeVolume('up')"><span class="glyphicon glyphicon-plus"></span></button>
 						<button type="button" class="btn btn-default" ng-click="changeVolume('down')"><span class="glyphicon glyphicon-minus"></span></button>
 						<div class="progress {{castData.progressBarClass}}" ng-click="seekPosition($event)">

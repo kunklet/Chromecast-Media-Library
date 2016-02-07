@@ -123,6 +123,8 @@ mediaApp.controller('CastCtrl', function($scope, $http, $interval, $timeout, Cas
 		if ($scope.castData.session.media.length > 0) {
 			$scope.checkMuteStatus($scope.castData.session.media[0]);
 			$scope.checkPlayStatus($scope.castData.session.media[0]);
+			$scope.castData.progressBarSeconds = $scope.castData.session.media[0].currentTime;
+			$scope.updateProgressBar();
 			// find the currently playing movie and update it with what is currently playing
 			angular.forEach($scope.movies, function(value, key) {
 				if($scope.movies[key].src == $scope.castData.session.media[0].media.customData.src) {
@@ -149,8 +151,6 @@ mediaApp.controller('CastCtrl', function($scope, $http, $interval, $timeout, Cas
 	};
 
 	$scope.onMediaDiscovered = function(media) {
-		//console.log('media discovered');
-		//console.log(media);
 		$scope.castData.session.media[0].addUpdateListener($scope.mediaUpdateListener);
 		$scope.castData.session.addUpdateListener($scope.sessionUpdateListener);
 	};
@@ -346,8 +346,7 @@ mediaApp.controller('CastCtrl', function($scope, $http, $interval, $timeout, Cas
 			} else if(curVolume.level > 0 && direction == 'down'){
 				curVolume.level -= 0.1;
 			}
-			var volumeRequest = new chrome.cast.media.VolumeRequest(curVolume);
-			$scope.castData.session.media[0].setVolume(volumeRequest, $scope.volumeSuccess, $scope.onCastError);
+			$scope.castData.session.setReceiverVolumeLevel(curVolume.level, $scope.volumeSuccess, $scope.onCastError);
 		}
 	};
 
@@ -439,16 +438,16 @@ mediaApp.controller('CastCtrl', function($scope, $http, $interval, $timeout, Cas
 
 	$scope.animatedProgressBar = function() {
 		$scope.castData.progressBarClass = 'progress-striped active';
-	}
+	};
 
 	$scope.nonanimatedProgressBar = function() {
 		$scope.castData.progressBarClass = '';
-	}
+	};
 
 	$scope.loadingProgressBar = function() {
 		$scope.castData.progressBarPercent = 100.0;
 		$scope.castData.progressBarClass = 'progress-striped active';
-	}
+	};
 
 	/* non cast methods */
 	$scope.playMovie = function(movie) {
