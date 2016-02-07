@@ -124,7 +124,7 @@ mediaApp.controller('CastCtrl', function($scope, $http, $interval, $timeout, Cas
 			$scope.checkMuteStatus($scope.castData.session.media[0]);
 			$scope.checkPlayStatus($scope.castData.session.media[0]);
 			$scope.castData.progressBarSeconds = $scope.castData.session.media[0].currentTime;
-			$scope.updateProgressBar();
+			$scope.startProgressBar();
 			// find the currently playing movie and update it with what is currently playing
 			angular.forEach($scope.movies, function(value, key) {
 				if($scope.movies[key].src == $scope.castData.session.media[0].media.customData.src) {
